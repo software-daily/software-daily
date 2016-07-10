@@ -1,0 +1,57 @@
+/**
+ * Header component styles.
+ */
+
+body {
+  padding-top: $header-height; /* $header-height located in `settings/_spacing` */
+}
+
+.header {
+  background-color: $theme-4;
+  border-top: 2px solid $theme-5;
+  border-bottom: 2px solid #eee;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: $z-index--1;
+}
+
+.header-nav-items {
+  float: left;
+}
+
+.header-status-items {
+  float: right;
+}
+
+.header > .container > ul {
+  margin-bottom: 0;
+}
+
+.header > .container > ul > li {
+  float: left;
+}
+
+.header > .container > ul > li > a,
+.header > .container > ul > li > span {
+  display: block;
+  padding: calc($atom * 3) calc($atom * 6) calc($atom * 3 + 1px);
+}
+
+.header > .container > ul > li > a {
+  color: $white;
+}
+
+.header > .container > ul > li:not(.is-active) > a:hover,
+.header > .container > ul > li:not(.is-active) > a:focus {
+  background-color: rgba(0, 0, 0, .0625);
+}
+
+.header > .container > ul > li > span {
+  color: $theme-1;
+}
+
+.header > .container > ul > .is-active > a {
+  background-color: $theme-5;
+}

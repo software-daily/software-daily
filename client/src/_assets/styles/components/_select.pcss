@@ -1,0 +1,49 @@
+/**
+ * Select styles.
+ */
+
+.select {
+  position: relative;
+  z-index: $z-index--1;
+}
+
+.select > .form-control {
+  border-radius: $input-border-radius 0 0 0;
+}
+
+.select-list {
+  background-color: $white;
+  border: 1px solid $input-border-color;
+  border-top: 0;
+  border-radius-bottom-right: $input-border-radius;
+  border-radius-bottom-left: $input-border-radius;
+  margin-bottom: 0;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+}
+
+.select-list > li {
+  cursor: pointer;
+  padding: $input-padding;
+  user-select: none;
+}
+
+.select-list > li:not(:last-of-type) {
+  border-bottom: 1px solid $lightest-gray;
+}
+
+.select-list > .is-active {
+  background-color: $input-color;
+  color: $white;
+}
+
+.select-list > li:hover:not(.is-active):not(.no-results) {
+  background-color: $lightest-gray;
+}
+
+.select-list > .no-results {
+  color: $light-gray;
+  cursor: default;
+  font-style: italic;
+}

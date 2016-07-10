@@ -1,0 +1,62 @@
+/**
+ * Card styles.
+ */
+
+$card-spacing: $section-spacing;
+
+/* card list */
+
+.card-list {
+}
+
+.card-list > li:not(:last-of-type) {
+  margin-bottom: $card-spacing;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, .05);
+  border: 1px solid $light-gray;
+  padding: $card-spacing;
+  position: relative;
+  @mixin transition background-color;
+}
+
+/* card item */
+
+.card {
+  border-radius: $atom;
+}
+
+.card:hover {
+  background-color: $white;
+}
+
+.card > * {
+  display: block;
+}
+
+.card-title {
+  color: $gray;
+  margin-bottom: .25em;
+}
+
+.card-title:hover {
+  color: $theme-4;
+}
+
+.card-author {
+  font-style: italic;
+}
+
+.card-author > a {
+  color: $gray;
+}
+
+.card-author > a:hover {
+  color: $theme-3;
+}
+
+.card-time {
+  color: $light-gray;
+  text-align: right;
+}

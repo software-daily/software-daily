@@ -1,0 +1,23 @@
+/**
+ * Controls styles.
+ */
+
+.controls {
+  background-color: $controls-background;
+  height: 100%;
+  left: 0;
+  padding: $section-spacing;
+  position: fixed;
+  top: $header-height;
+  width: $controls-width;
+}
+
+.controls-title {
+  color: $lighter-gray;
+  margin-bottom: 0;
+}
+
+.controls > *:not(.controls-title) {
+  margin-top: calc($atom * 10);
+  margin-bottom: 0;
+}

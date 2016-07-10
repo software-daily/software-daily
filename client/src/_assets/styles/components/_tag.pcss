@@ -1,0 +1,43 @@
+/**
+ * Tag styles.
+ */
+
+$tag-spacing: calc($atom * 2);
+$tag-spacing-neg: calc($atom * -2);
+
+/* tag list */
+
+.tag-list {
+  margin: calc($atom * -1) calc($atom * -2);
+}
+
+.tag-list > li {
+  display: inline-block;
+  padding: calc($atom * 1) calc($atom * 2);
+}
+
+/* tag item */
+
+.tag {
+  background-color: $lightest-gray;
+  border-radius: $input-border-radius;
+  color: $gray;
+  cursor: pointer;
+  padding: $atom calc($atom * 2);
+  transition: background-color $transition-speed, color $transition-speed;
+  user-select: none;
+}
+
+.tag.is-highlighted {
+  background-color: $input-color;
+  color: $white;
+}
+
+.tag > a { /* "x" link */
+  color: inherit;
+  font-size: .75em;
+  margin-right: .25em;
+  position: relative;
+  top: -.05em;
+  transition: none;
+}

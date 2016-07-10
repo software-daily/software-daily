@@ -1,0 +1,51 @@
+/**
+ * Input styles.
+ */
+
+$input-border-color: $lighter-gray;
+$input-border-color-on-focus: $theme-3;
+$input-border-radius: $atom;
+$input-color: $theme-5;
+$input-padding: calc($atom * 2) calc($atom * 4);
+
+.form-control,
+.input-group-addon {
+  border-color: $input-border-color;
+}
+
+/* form group */
+
+label {
+  color: $lighter-gray;
+  margin-bottom: .5em;
+  text-transform: uppercase;
+}
+
+/* input group */
+
+.input-group-addon {
+  background-color: $lightest-gray;
+  border-radius: $input-border-radius;
+  color: $input-color;
+}
+
+/* form control */
+
+.form-control,
+.form-control:active,
+.form-control:hover,
+.form-control:focus {
+  box-shadow: none;
+}
+
+.form-control {
+  border-radius: $input-border-radius;
+  color: $input-color;
+  height: $input-height;
+  padding: $input-padding;
+  @mixin transition border-color;
+}
+
+.form-control:focus {
+  border-color: $input-border-color-on-focus;
+}
