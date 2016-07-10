@@ -6,6 +6,8 @@ body {
   background-color: $body-background;
 }
 
+/* links */
+
 a,
 a:hover,
 a:focus {
@@ -13,6 +15,23 @@ a:focus {
 }
 
 a {
-  color: $theme-4;
+  color: $link-color;
   @mixin transition color;
+}
+
+a:hover,
+a:focus {
+  color: $link-hover-color;
+}
+
+/* definition list */
+
+dt {
+  color: $lighter-gray;
+  margin-bottom: $dt-spacing;
+  text-transform: uppercase;
+}
+
+dt:not(:first-of-type) {
+  margin-top: calc($dt-spacing * 2);
 }

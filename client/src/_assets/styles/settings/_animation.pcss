@@ -4,6 +4,7 @@
 
 $transition-speed: .15s;
 
-@define-mixin transition $property {
-  transition: $property $transition-speed;
-}
+$transition-base:
+  background-color $transition-speed,
+  border-color $transition-speed,
+  color $transition-speed;

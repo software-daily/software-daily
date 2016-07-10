@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import {connect} from 'react-redux';
-import Feed from '../containers/Feed';
 import Header from '../components/Header';
+import Feed from '../containers/Feed';
 import SiteControls from '../containers/SiteControls';
 
 const App = React.createClass({
@@ -10,17 +10,21 @@ const App = React.createClass({
     auth: ImmutablePropTypes.mapContains({
       signedIn: PropTypes.bool.isRequired,
       user: ImmutablePropTypes.record
-    }).isRequired
+    }).isRequired,
+    children: PropTypes.node,
+    params: PropTypes.object.isRequired
   },
 
   render() {
-    const user = this.props.auth.get('user');
+    const {auth, children, params} = this.props;
+    const user = auth.get('user');
 
     return (
       <div>
         <Header username={user.get('username')} />
         <SiteControls title={'software daily.'} />
-        <Feed />
+        <Feed activePostId={Number(params.postId)} />
+        {children}
       </div>
     );
   }

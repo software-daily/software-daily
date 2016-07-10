@@ -6,25 +6,20 @@ $card-spacing: $section-spacing;
 
 /* card list */
 
-.card-list {
-}
-
 .card-list > li:not(:last-of-type) {
   margin-bottom: $card-spacing;
-}
-
-.card {
-  background-color: rgba(0, 0, 0, .05);
-  border: 1px solid $light-gray;
-  padding: $card-spacing;
-  position: relative;
-  @mixin transition background-color;
 }
 
 /* card item */
 
 .card {
+  background-color: rgba(0, 0, 0, .05);
+  border: 1px solid $light-gray;
   border-radius: $atom;
+  padding: $card-spacing;
+  position: relative;
+  transition: $transition-base;
+  user-select: none;
 }
 
 .card:hover {
@@ -53,10 +48,27 @@ $card-spacing: $section-spacing;
 }
 
 .card-author > a:hover {
-  color: $theme-3;
+  color: $link-hover-color;
 }
 
 .card-time {
   color: $light-gray;
   text-align: right;
+}
+
+/* active card (post detail is open) */
+
+.is-active > .card {
+  background-color: $theme-4;
+  border-color: $white;
+  color: $white;
+}
+
+.is-active .card-title {
+  color: $white;
+}
+
+.is-active .card-author > a,
+.is-active .card-time {
+  color: $lightest-gray;
 }
