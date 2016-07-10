@@ -1,8 +1,8 @@
 # software-daily.client
 
-**Slack:** https://software-daily.slack.com
+**Slack:** https://software-daily.slack.com/messages/client/
 
-This repository houses the client (browser) code for the future [softwaredaily.com](http://softwaredaily.com).
+This module houses the client (browser) code for the future [softwaredaily.com](http://softwaredaily.com).
 
 ### Get started
 
