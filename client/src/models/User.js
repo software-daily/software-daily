@@ -3,9 +3,12 @@
  */
 
 import {Record} from 'immutable';
+import moment from 'moment';
 
 const User = Record({
   id: undefined,
+  createdAt: moment().format(),
+  twitter: undefined,
   username: undefined
 });
 

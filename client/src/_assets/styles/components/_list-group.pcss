@@ -1,0 +1,35 @@
+/**
+ * List group.
+ */
+
+.list-group-item {
+  border-color: $input-border-color;
+}
+
+.list-group-item:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.list-group-item:last-child {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+a.list-group-item,
+button.list-group-item {
+  color: $gray;
+  transition: $transition-base;
+}
+
+a.list-group-item:hover,
+button.list-group-item:hover {
+  background-color: $lightest-gray;
+  color: $theme-5;
+}
+
+.list-group-item > small {
+  color: $light-gray;
+  display: block;
+  font-style: italic;
+}

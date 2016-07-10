@@ -22,6 +22,8 @@ At the time of this writing, this is what the interface looks like:
 
 ![Interface Example C](/docs/images/interface-example-c.png?raw=true "Interface Example C")
 
+![Interface Example C](/docs/images/interface-example-d.png?raw=true "Interface Example D")
+
 *(Jeff T. speaking...)*
 
 My goal has been to get a working interface up as fast as possible, so that we can try out features and figure out what works best. This means that I've pretty much exclusively been working on the user interface, and am using static sample data.

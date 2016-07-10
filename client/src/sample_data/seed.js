@@ -209,37 +209,114 @@ const tags = (function() {
   }, []);
 })();
 
-const usernames = [
-  'ashitlerferad',
-  'adamnemecek',
-  'ingve',
-  'andars',
-  'based2',
-  'ColinWright',
-  'NickLarsen',
-  'telecomix',
-  'hitr',
-  'dnetesn',
-  'nadahalli',
-  'Aloisius',
-  'jmngomes',
-  'spathak',
-  'isp',
-  'ranvir',
-  'hrisp',
-  'mischa_u',
-  'justinweiss',
-  'ghotli',
-  'irunbackwards',
-  'ssclafani'
-];
+const randomTimestamp = (function() {
+  const start = new Date(2014, 0, 0);
+  const end = new Date();
+  return () => {
+    return moment(
+      new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
+    ).format();
+  };
+})();
 
 const users = (function() {
+  const userAccounts = [
+    {
+      username: 'ashitlerferad',
+      twitter: undefined
+    },
+    {
+      username: 'adamnemecek',
+      twitter: 'adamnemecek'
+    },
+    {
+      username: 'ingve',
+      twitter: undefined
+    },
+    {
+      username: 'andars',
+      twitter: undefined
+    },
+    {
+      username: 'based2',
+      twitter: undefined
+    },
+    {
+      username: 'ColinWright',
+      twitter: undefined
+    },
+    {
+      username: 'NickLarsen',
+      twitter: undefined
+    },
+    {
+      username: 'telecomix',
+      twitter: 'telecomix'
+    },
+    {
+      username: 'hitr',
+      twitter: undefined
+    },
+    {
+      username: 'dnetesn',
+      twitter: 'dnetesn'
+    },
+    {
+      username: 'nadahalli',
+      twitter: 'nadahalli'
+    },
+    {
+      username: 'Aloisius',
+      twitter: 'Aloisius'
+    },
+    {
+      username: 'jmngomes',
+      twitter: 'jmngomes'
+    },
+    {
+      username: 'spathak',
+      twitter: undefined
+    },
+    {
+      username: 'isp',
+      twitter: undefined
+    },
+    {
+      username: 'ranvir',
+      twitter: undefined
+    },
+    {
+      username: 'hrisp',
+      twitter: undefined
+    },
+    {
+      username: 'mischa_u',
+      twitter: undefined
+    },
+    {
+      username: 'justinweiss',
+      twitter: 'justinweiss'
+    },
+    {
+      username: 'ghotli',
+      twitter: undefined
+    },
+    {
+      username: 'irunbackwards',
+      twitter: 'irunbackwards'
+    },
+    {
+      username: 'ssclafani',
+      twitter: 'ssclafani'
+    }
+  ];
   let id = 2;
-  return usernames.map(username => {
+  return userAccounts.map(userAccount => {
     return {
       id: id++,
-      username
+      createdAt: randomTimestamp(),
+      twitter: userAccount.twitter,
+      username: userAccount.username
     };
   });
 })();
@@ -249,15 +326,6 @@ const posts = (function() {
   const randomUserId = () => {
     return _.sample(users).id;
   };
-  const randomTimestamp = (function() {
-    const start = new Date(2014, 0, 0);
-    const end = new Date();
-    return () => {
-      return moment(
-        new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
-      ).format();
-    };
-  })();
 
   return _.sortBy(postsByTag.reduce((acc, curr) => {
     const tag = _.find(tags, {text: curr.tag});

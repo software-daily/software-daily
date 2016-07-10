@@ -6,6 +6,7 @@ import CardList from '../components/CardList';
 
 const Feed = React.createClass({
   propTypes: {
+    activePostId: PropTypes.number,
     filters: ImmutablePropTypes.mapContains({
       keywords: PropTypes.string.isRequired,
       tags: ImmutablePropTypes.mapContains({
@@ -53,11 +54,12 @@ const Feed = React.createClass({
   },
 
   render() {
-    const {users} = this.props;
+    const {activePostId, users} = this.props;
 
     return (
       <div className="feed">
         <CardList
+          activePostId={activePostId}
           posts={this.filteredPosts()}
           users={users}
         />

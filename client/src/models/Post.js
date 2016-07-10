@@ -3,10 +3,11 @@
  */
 
 import {Record} from 'immutable';
+import moment from 'moment';
 
 const Post = Record({
   id: undefined,
-  createdAt: undefined,
+  createdAt: moment().format(),
   title: undefined,
   sourceUrl: undefined,
   authorId: undefined,
