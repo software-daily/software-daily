@@ -1,6 +1,6 @@
 # software-daily.client
 
-**Slack:** https://software-daily.slack.com/messages/client/
+**Join us on Slack:** https://software-daily-slack.herokuapp.com/
 
 This module houses the client (browser) code for the future [softwaredaily.com](http://softwaredaily.com).
 
