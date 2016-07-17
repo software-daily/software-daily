@@ -4,13 +4,13 @@
 
 Well, hello!
 
-This repository houses the code for the future [softwaredaily.com](http://softwaredaily.com). This project is in the very-early stages - we're still trying to figure out what purpose the application should serve, how it could be useful to the software development community, what features the MVP should have, etc.
+This repository houses the code for the future [softwaredaily.com](http://softwaredaily.com). This project is in the very early stages: we're still trying to figure out what purpose the application should serve, how it could be useful to the software development community, what features the MVP should have, etc.
 
 Here are some of our ideas so far:
 
 - Build an open-source news & information site about software.
-- Take queues from [Hacker News](https://news.ycombinator.com/), but create an interface that's more powerful and easier to use.
-- Make the site useful for a wide audience (i.e. allow our users to customize & tailor their feed so that they can discover content that's relevant to them, and suppress the content that isn't as relevant).
+- Take cues from [Hacker News](https://news.ycombinator.com/), but create an interface that's more powerful and easier to use.
+- Make the site useful for a wide audience (i.e., allow our users to customize & tailor their feed so that they can discover content that's relevant to them, and suppress the content that isn't as relevant).
 
 Perhaps the most exciting of these three points is the prospect of using the open-source model. This would mean that our users (mostly coders?) can add features, fix bugs, etc.
 
@@ -32,4 +32,4 @@ I think it would be helpful to dialogue with some other people who are intereste
 
 If you're interested in working on the project, or have ideas about how you want to contribute, feel free to join the Slack team and post a message to the [#general](https://software-daily.slack.com/messages/general/) or [#project-vision](https://software-daily.slack.com/messages/project-vision/) channel.
 
-If you'd like to check out the UI code that we have so far, head on over to [client/README.md](client/README.md)
+If you'd like to check out the UI code that we have so far, head on over to [client/README.md](client/README.md).
