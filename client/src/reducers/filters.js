@@ -73,7 +73,10 @@ function toggleTagSelected(state, action) {
   const tagId = action.payload.tagId;
   // If the set has this tagId, remove it.
   if (state.getIn(['tags', 'selected']).has(tagId)) {
-    return state.updateIn(['tags', 'selected'], set => {
+    // If the tag is highlighted, unhighlight it.
+    return state.updateIn(['tags', 'highlighted'], set => {
+      return set.delete(tagId);
+    }).updateIn(['tags', 'selected'], set => {
       return set.delete(tagId);
     });
   }
