@@ -1,33 +1,31 @@
 import React, {PropTypes} from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import _ from 'lodash';
 import Card from './Card';
-import {unknownUser} from '../models/User';
+import {postShape} from '../models/Post';
+import {userShape, unknownUser} from '../models/User';
 
 const CardList = React.createClass({
   propTypes: {
     activePostId: PropTypes.number,
-    posts: ImmutablePropTypes.listOf(ImmutablePropTypes.record),
-    users: ImmutablePropTypes.listOf(ImmutablePropTypes.record)
+    authors: PropTypes.arrayOf(PropTypes.shape(userShape)),
+    posts: PropTypes.arrayOf(PropTypes.shape(postShape))
   },
 
   render() {
-    const {activePostId, posts, users} = this.props;
+    const {activePostId, authors, posts} = this.props;
 
     return (
       <ul className="card-list list-unstyled">
-        {posts.map((post, i) => {
+        {posts.map(post => {
           const classes = [];
           if (post.id === activePostId) {
             classes.push('is-active');
           }
-          const author = users.find(user => user.id === post.authorId);
+          const author = _.find(authors, {id: post.authorId}) || unknownUser;
 
           return (
-            <li className={classes.join(' ')} key={i}>
-              <Card
-                author={author || unknownUser}
-                post={post}
-              />
+            <li className={classes.join(' ')} key={post.id}>
+              <Card author={author} post={post} />
             </li>
           );
         })}

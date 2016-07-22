@@ -1,25 +1,15 @@
 import React, {PropTypes} from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import moment from 'moment';
+import _ from 'lodash';
+import {postShape} from '../models/Post';
+import {unknownUser, userShape} from '../models/User';
 
 const PostDetail = React.createClass({
   propTypes: {
-    author: ImmutablePropTypes.recordOf({
-      id: PropTypes.number,
-      createdAt: PropTypes.string,
-      username: PropTypes.string
-    }),
+    author: PropTypes.shape(userShape),
     params: PropTypes.object.isRequired,
-    post: ImmutablePropTypes.recordOf({
-      id: PropTypes.number,
-      createdAt: PropTypes.string,
-      title: PropTypes.string,
-      sourceUrl: PropTypes.string,
-      authorId: PropTypes.number,
-      tagIds: PropTypes.arrayOf(PropTypes.number)
-    })
+    post: PropTypes.shape(postShape)
   },
 
   render() {
@@ -47,9 +37,7 @@ const PostDetail = React.createClass({
               </dd>
 
               <dt>{'Posted'}</dt>
-              <dd>
-                {moment(post.get('createdAt')).format('dddd, MMMM Do, YYYY')}
-              </dd>
+              <dd>{post.createdFull()}</dd>
             </dl>
           </div>
         ) : (
@@ -63,13 +51,11 @@ const PostDetail = React.createClass({
 });
 
 const mapStateToProps = (state, otherProps) => {
-  const postId = Number(otherProps.params.postId);
-  const post = state.getIn(['collections', 'posts']).find(post => {
-    return post.id === postId;
-  });
-  const author = post ? state.getIn(['collections', 'users']).find(user => {
-    return user.id === post.authorId;
-  }) : undefined;
+  const activePostId = Number(otherProps.params.postId);
+  const post = _.find(state.collections.posts, {id: activePostId});
+  const author = post ? _.find(state.collections.users, {
+    id: post.authorId
+  }) || unknownUser : undefined;
 
   return {author, post};
 };

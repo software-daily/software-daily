@@ -1,49 +1,54 @@
 import React, {PropTypes} from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import CardList from '../components/CardList';
+import {postShape} from '../models/Post';
+import {userShape} from '../models/User';
 
 const Feed = React.createClass({
   propTypes: {
     activePostId: PropTypes.number,
-    filters: ImmutablePropTypes.mapContains({
+    authors: PropTypes.arrayOf(PropTypes.shape(userShape)).isRequired,
+    filters: PropTypes.shape({
+      highlightedTagIds: PropTypes.arrayOf(PropTypes.number).isRequired,
       keywords: PropTypes.string.isRequired,
-      tags: ImmutablePropTypes.mapContains({
-        highlighted: ImmutablePropTypes.set.isRequired,
-        selected: ImmutablePropTypes.set.isRequired
-      }).isRequired
+      selectedTagIds: PropTypes.arrayOf(PropTypes.number).isRequired
     }).isRequired,
-    posts: ImmutablePropTypes.listOf(ImmutablePropTypes.record).isRequired,
-    users: ImmutablePropTypes.listOf(ImmutablePropTypes.record).isRequired
+    posts: PropTypes.arrayOf(PropTypes.shape(postShape)).isRequired
   },
 
-  filteredPosts() {
-    const keywords = this.props.filters.get('keywords');
-    const highlightedTagIds = this.props.filters.getIn(['tags', 'highlighted']);
-    const selectedTagIds = this.props.filters.getIn(['tags', 'selected']);
+  getInitialState() {
+    return {
+      filteredPosts: this.filteredPosts()
+    };
+  },
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      filteredPosts: this.filteredPosts(nextProps.posts, nextProps.filters)
+    });
+  },
+
+  filteredPosts(allPosts = this.props.posts, filters = this.props.filters) {
+    const {highlightedTagIds, keywords, selectedTagIds} = filters;
     // Use "let" because our reference will change if we apply filters.
-    let posts = this.props.posts;
+    let posts = allPosts;
     // If there are highlighted tags, apply them as a filter.
-    if (highlightedTagIds.size > 0) {
-      posts = posts.filter(post => {
-        return _.some(post.get('tagIds'), tagId => {
-          return highlightedTagIds.has(tagId);
-        });
+    if (highlightedTagIds.length > 0) {
+      posts = _.filter(posts, post => {
+        return _.intersection(post.tagIds, highlightedTagIds).length > 0;
       });
     // Otherwise, if there are selected (but not highlighted) tags, apply them.
-    } else if (selectedTagIds.size > 0) {
-      posts = posts.filter(post => {
-        return _.some(post.get('tagIds'), tagId => {
-          return selectedTagIds.has(tagId);
-        });
+    } else if (selectedTagIds.length > 0) {
+      posts = _.filter(posts, post => {
+        return _.intersection(post.tagIds, selectedTagIds).length > 0;
       });
     }
     // Lastly, if there are keywords, apply them as a filter.
     if (keywords) {
       const words = _.words(keywords).map(word => word.toLowerCase());
-      posts = posts.filter(post => {
-        const postTitle = post.get('title').toLowerCase();
+      posts = _.filter(posts, post => {
+        const postTitle = post.title.toLowerCase();
         return _.every(words, word => {
           return _.includes(postTitle, word);
         });
@@ -54,14 +59,14 @@ const Feed = React.createClass({
   },
 
   render() {
-    const {activePostId, users} = this.props;
+    const {activePostId, authors} = this.props;
 
     return (
       <div className="feed">
         <CardList
           activePostId={activePostId}
-          posts={this.filteredPosts()}
-          users={users}
+          authors={authors}
+          posts={this.state.filteredPosts}
         />
       </div>
     );
@@ -70,9 +75,9 @@ const Feed = React.createClass({
 
 const mapStateToProps = state => {
   return {
-    filters: state.get('filters'),
-    posts: state.getIn(['collections', 'posts']),
-    users: state.getIn(['collections', 'users'])
+    authors: state.collections.users,
+    filters: state.filters,
+    posts: state.collections.posts
   };
 };
 

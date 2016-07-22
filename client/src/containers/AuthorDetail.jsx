@@ -1,18 +1,15 @@
 import React, {PropTypes} from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import moment from 'moment';
+import _ from 'lodash';
+import {postShape} from '../models/Post';
+import {userShape} from '../models/User';
 
 const AuthorDetail = React.createClass({
   propTypes: {
-    author: ImmutablePropTypes.recordOf({
-      id: PropTypes.number,
-      createdAt: PropTypes.string,
-      username: PropTypes.string
-    }),
+    author: PropTypes.shape(userShape),
     params: PropTypes.object.isRequired,
-    posts: ImmutablePropTypes.listOf(ImmutablePropTypes.record)
+    posts: PropTypes.arrayOf(PropTypes.shape(postShape))
   },
 
   render() {
@@ -35,20 +32,20 @@ const AuthorDetail = React.createClass({
             </h2>
             <dl>
               <dt>{'Joined'}</dt>
-              <dd>{moment(author.get('createdAt')).fromNow()}</dd>
+              <dd>{author.createdAgo()}</dd>
 
               <dt>{'Posts'}</dt>
               <dd>
                 <div className="list-group">
-                  {posts.map((post, i) => (
+                  {posts.map(post => (
                     <Link
                       className="list-group-item"
-                      key={i}
+                      key={post.id}
                       to={`/posts/${post.id}`}
                     >
                       {post.title}
                       <small>
-                        {moment(post.get('createdAt')).fromNow()}
+                        {post.createdAgo()}
                       </small>
                     </Link>
                   ))}
@@ -67,12 +64,12 @@ const AuthorDetail = React.createClass({
 });
 
 const mapStateToProps = (state, otherProps) => {
-  const author = state.getIn(['collections', 'users']).find(user => {
-    return user.username === otherProps.params.authorUsername;
+  const author = _.find(state.collections.users, {
+    username: otherProps.params.authorUsername
   });
-  const posts = author ? state.getIn(['collections', 'posts']).filter(post => {
-    return post.authorId === author.id;
-  }) : undefined;
+  const posts = author ? _.filter(state.collections.posts, {
+    authorId: author.id
+  }) : [];
 
   return {author, posts};
 };

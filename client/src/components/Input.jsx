@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 
 const Input = React.createClass({
   propTypes: {
+    onChange: PropTypes.func,
     type: PropTypes.string
   },
 
@@ -12,13 +13,18 @@ const Input = React.createClass({
   },
 
   render() {
-    const {type, ...props} = this.props;
+    const {onChange, type, ...otherProps} = this.props;
 
     return (
       <input
         className="form-control"
+        onChange={e => {
+          if (onChange) {
+            onChange(e.target.value);
+          }
+        }}
         type={type}
-        {...props}
+        {...otherProps}
       />
     );
   }
