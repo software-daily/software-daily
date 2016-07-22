@@ -1,23 +1,12 @@
 import React, {PropTypes} from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import {Link, browserHistory} from 'react-router';
-import moment from 'moment';
+import {postShape} from '../models/Post';
+import {userShape} from '../models/User';
 
 const Card = React.createClass({
   propTypes: {
-    author: ImmutablePropTypes.recordOf({
-      id: PropTypes.number,
-      createdAt: PropTypes.string,
-      username: PropTypes.string
-    }),
-    post: ImmutablePropTypes.recordOf({
-      id: PropTypes.number,
-      createdAt: PropTypes.string,
-      title: PropTypes.string,
-      sourceUrl: PropTypes.string,
-      authorId: PropTypes.number,
-      tagIds: PropTypes.arrayOf(PropTypes.number)
-    })
+    author: PropTypes.shape(userShape),
+    post: PropTypes.shape(postShape)
   },
 
   handleAuthorClick(e) {
@@ -44,16 +33,16 @@ const Card = React.createClass({
           href={post.sourceUrl}
           onClick={this.handleTitleClick}
           target="_blank"
-        >{post.get('title')}</a>
+        >{post.title}</a>
         <span className="card-author">
           {'by '}
           <Link
             onClick={this.handleAuthorClick}
-            to={`/authors/${author.get('username')}`}
-          >{author.get('username')}</Link>
+            to={`/authors/${author.username}`}
+          >{author.username}</Link>
         </span>
         <span className="card-time">
-          {moment(post.get('createdAt')).fromNow()}
+          {post.createdAgo()}
         </span>
       </div>
     );

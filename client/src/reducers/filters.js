@@ -2,20 +2,21 @@
  * Reducer for the `store.filters`
  */
 
+import _ from 'lodash';
 import {types} from '../action_creators/filters';
 import _initialState from '../store/initial_state';
 
 /**
-* @var {Immutable.Map} - The initial state.
+* @var {object} - The initial state.
 */
-const initialState = _initialState.get('filters');
+const initialState = _initialState.filters;
 
 /**
  * Given the current state and an action to apply, return the new state.
  *
- * @param {Immutable.Map} state - The current state
+ * @param {object} state - The current state
  * @param {object} action - The action to apply
- * @return {Immutable.Map} The new state
+ * @return {object} The new state
  */
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -33,55 +34,52 @@ export default function reducer(state = initialState, action) {
 /**
  * Set filter keywords.
  *
- * @param {Immutable.Map} state - The current state
+ * @param {object} state - The current state
  * @param {object} action - The action to apply
- * @return  {Immutable.Map} - The new state
+ * @return  {object} - The new state
  */
 function setKeywords(state, action) {
-  return state.set('keywords', action.payload.keywords);
+  return _.assign({}, state, {
+    keywords: action.payload.keywords
+  });
 }
 
 /**
  * Toggle a tag's highlighted state.
  *
- * @param {Immutable.Map} state - The current state
+ * @param {object} state - The current state
  * @param {object} action - The action to apply
- * @return  {Immutable.Map} - The new state
+ * @return  {object} - The new state
  */
 function toggleTagHighlighted(state, action) {
   const tagId = action.payload.tagId;
-  // If the set has this tagId, remove it.
-  if (state.getIn(['tags', 'highlighted']).has(tagId)) {
-    return state.updateIn(['tags', 'highlighted'], set => {
-      return set.delete(tagId);
-    });
+  const highlightedTagIds = state.highlightedTagIds.slice(0);
+  const tagIdIndex = highlightedTagIds.indexOf(tagId);
+  if (tagIdIndex === -1) {
+    highlightedTagIds.push(tagId);
+  } else {
+    highlightedTagIds.splice(tagIdIndex, 1);
   }
-  // Otherwise, add it.
-  return state.updateIn(['tags', 'highlighted'], set => {
-    return set.add(action.payload.tagId);
-  });
+  console.log('toggleTagHighlighted(state, action)', {state, action, highlightedTagIds});
+  return _.assign({}, state, {highlightedTagIds});
 }
 
 /**
  * Toggle a tag's selected state.
  *
- * @param {Immutable.Map} state - The current state
+ * @param {object} state - The current state
  * @param {object} action - The action to apply
- * @return  {Immutable.Map} - The new state
+ * @return  {object} - The new state
  */
 function toggleTagSelected(state, action) {
   const tagId = action.payload.tagId;
-  // If the set has this tagId, remove it.
-  if (state.getIn(['tags', 'selected']).has(tagId)) {
-    // If the tag is highlighted, unhighlight it.
-    return state.updateIn(['tags', 'highlighted'], set => {
-      return set.delete(tagId);
-    }).updateIn(['tags', 'selected'], set => {
-      return set.delete(tagId);
-    });
+  const selectedTagIds = state.selectedTagIds.slice(0);
+  const tagIdIndex = selectedTagIds.indexOf(tagId);
+  if (tagIdIndex === -1) {
+    selectedTagIds.push(tagId);
+  } else {
+    selectedTagIds.splice(tagIdIndex, 1);
   }
-  // Otherwise, add it.
-  return state.updateIn(['tags', 'selected'], set => {
-    return set.add(action.payload.tagId);
-  });
+  console.log('toggleTagSelected(state, action)', {state, action, selectedTagIds});
+  return _.assign({}, state, {selectedTagIds});
 }

@@ -59,10 +59,10 @@ const Select = React.createClass({
     });
   },
 
-  handleInputChange(e) {
+  handleInputChange(newValue) {
     this.setState({
-      filteredOptions: this.filteredOptions(this.props.options, e.target.value),
-      filterText: e.target.value
+      filteredOptions: this.filteredOptions(this.props.options, newValue),
+      filterText: newValue
     });
   },
 
@@ -108,7 +108,7 @@ const Select = React.createClass({
   },
 
   render() {
-    const {id, options, placeholder, showLimit} = this.props;
+    const {id, options, placeholder} = this.props;
     const {activeOptionIndex, filteredOptions, showOptions} = this.state;
 
     return (

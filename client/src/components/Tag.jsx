@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import Icon from './Icon';
+import {tagShape} from '../models/Tag';
 
 const Tag = ({isHighlighted, onDeselectTag, onHighlightTag, tag}) => {
   const classes = ['tag'];
@@ -11,13 +11,13 @@ const Tag = ({isHighlighted, onDeselectTag, onHighlightTag, tag}) => {
   return (
     <div
       className={classes.join(' ')}
-      onClick={e => onHighlightTag(e, tag.get('id'))}
+      onClick={e => onHighlightTag(e, tag.id)}
     >
-      <a onClick={e => onDeselectTag(e, tag.get('id'))}>
+      <a onClick={e => onDeselectTag(e, tag.id)}>
         <Icon icon="times" placement="before" />
       </a>
       <span className="tag-label">
-        {tag.get('text')}
+        {tag.text}
       </span>
     </div>
   );
@@ -27,10 +27,7 @@ Tag.propTypes = {
   isHighlighted: PropTypes.bool.isRequired,
   onDeselectTag: PropTypes.func.isRequired,
   onHighlightTag: PropTypes.func.isRequired,
-  tag: ImmutablePropTypes.recordOf({
-    id: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired
-  }).isRequired
+  tag: PropTypes.shape(tagShape).isRequired
 };
 
 export default Tag;

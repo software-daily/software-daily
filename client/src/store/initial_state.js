@@ -2,31 +2,28 @@
  * The initial state of our application.
  */
 
-import {List, Map, Set} from 'immutable';
-import Post from '../models/Post';
-import Tag from '../models/Tag';
-import User from '../models/User';
+import {createPost} from '../models/Post';
+import {createTag} from '../models/Tag';
+import {createUser} from '../models/User';
 import posts from '../sample_data/posts';
 import tags from '../sample_data/tags';
 import users from '../sample_data/users';
 
-const initialState = Map({
-  auth: Map({
+const initialState = {
+  auth: {
     signedIn: true,
-    user: new User({id: 1, username: 'jtribble'})
-  }),
-  collections: Map({
-    posts: List(posts.map(post => new Post(post))),
-    tags: List(tags.map(tag => new Tag(tag))),
-    users: List(users.map(user => new User(user)))
-  }),
-  filters: Map({
+    user: createUser({id: 1, username: 'jtribble'})
+  },
+  collections: {
+    posts: posts.map(post => createPost(post)),
+    tags: tags.map(tag => createTag(tag)),
+    users: users.map(user => createUser(user))
+  },
+  filters: {
     keywords: '',
-    tags: Map({
-      highlighted: Set(),
-      selected: Set()
-    })
-  })
-});
+    highlightedTagIds: [],
+    selectedTagIds: []
+  }
+};
 
 export default initialState;

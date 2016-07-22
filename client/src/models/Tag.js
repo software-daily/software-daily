@@ -2,13 +2,23 @@
  * Tag model.
  */
 
-import {Record} from 'immutable';
-import moment from 'moment';
+import {PropTypes} from 'react';
+import _ from 'lodash';
+import {createModel, createShape, createSpec} from './util';
 
-const Tag = Record({
-  id: undefined,
-  createdAt: moment().format(),
-  text: undefined
-});
+const spec = createSpec([
+  {field: 'text', type: PropTypes.string}
+]);
 
-export default Tag;
+export const tagShape = createShape(spec.shape);
+export const tagProto = createModel(spec.proto);
+
+/**
+ * Create a new tag object.
+ *
+ * @param {object} [values] - Values to assign.
+ * @return {object} - The tag model object.
+ */
+export function createTag(values) {
+  return _.create(tagProto, values);
+}

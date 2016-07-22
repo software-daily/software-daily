@@ -1,19 +1,25 @@
 import React, {Children, cloneElement, PropTypes} from 'react';
+import _ from 'lodash';
 import {s4} from '../modules/guid';
 
-const FormGroup = ({children, label}) => {
-  const inputId = s4();
+const FormGroup = ({children, labelText}) => {
+  let childrenId;
+  if (labelText) {
+    childrenId = `x${_.snakeCase(labelText)}`;
+  } else {
+    childrenId = s4();
+  }
 
   return (
     <div className="form-group">
-      {label ? (
-        <label htmlFor={inputId}>
-          {label}
+      {labelText ? (
+        <label htmlFor={childrenId}>
+          {labelText}
         </label>
       ) : null}
       {Children.map(children, child => {
         return cloneElement(child, {
-          id: inputId
+          id: childrenId
         });
       })}
     </div>
@@ -23,7 +29,7 @@ const FormGroup = ({children, label}) => {
 FormGroup.propTypes = {
   children: PropTypes.object.isRequired,
   classes: PropTypes.string,
-  label: PropTypes.string
+  labelText: PropTypes.string
 };
 
 export default FormGroup;

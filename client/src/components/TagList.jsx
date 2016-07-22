@@ -1,13 +1,14 @@
 import React, {PropTypes} from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import _ from 'lodash';
 import Tag from './Tag';
+import {tagShape} from '../models/Tag';
 
 const TagList = React.createClass({
   propTypes: {
-    highlightedTagIds: ImmutablePropTypes.set.isRequired,
+    highlightedTagIds: PropTypes.arrayOf(PropTypes.number).isRequired,
     onDeselectTag: PropTypes.func.isRequired,
     onHighlightTag: PropTypes.func.isRequired,
-    tags: ImmutablePropTypes.listOf(ImmutablePropTypes.record).isRequired
+    tags: PropTypes.arrayOf(PropTypes.shape(tagShape)).isRequired
   },
 
   handleDeselectTag(e, tagId) {
@@ -28,10 +29,10 @@ const TagList = React.createClass({
 
     return (
       <ul className="tag-list list-unstyled">
-        {tags.map((tag, i) => {
-          const isHighlighted = highlightedTagIds.has(tag.get('id'));
+        {tags.map(tag => {
+          const isHighlighted = _.includes(highlightedTagIds, tag.id);
           return (
-            <li key={i}>
+            <li key={tag.id}>
               <Tag
                 tag={tag}
                 isHighlighted={isHighlighted}

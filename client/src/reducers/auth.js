@@ -5,16 +5,16 @@
 import _initialState from '../store/initial_state';
 
 /**
- * @var {Immutable.Map} - The initial state.
+ * @var {object} - The initial state.
  */
-const initialState = _initialState.get('auth');
+const initialState = _initialState.auth;
 
 /**
  * Given the current state and an action to apply, return the new state
  *
- * @param {Immutable.Map} state - The current state
+ * @param {object} state - The current state
  * @param {object} action - The action to apply
- * @return {Immutable.Map} The new state
+ * @return {object} The new state
  */
 export default function reducer(state = initialState, action) {
   switch (action.type) {
