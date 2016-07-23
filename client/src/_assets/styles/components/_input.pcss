@@ -6,7 +6,6 @@ $input-border-color: $lighter-gray;
 $input-border-color-on-focus: $theme-3;
 $input-border-radius: $atom;
 $input-color: $theme-5;
-$input-padding: calc($atom * 2) calc($atom * 4);
 
 .form-control,
 .input-group-addon {
@@ -42,10 +41,28 @@ label {
   border-radius: $input-border-radius;
   color: $input-color;
   height: $input-height;
-  padding: $input-padding;
+  padding: $input-padding-vertical $input-padding-horizontal;
   transition: $transition-base;
 }
 
 .form-control:focus {
   border-color: $input-border-color-on-focus;
+}
+
+/* expanding form control */
+
+textarea.form-control--expanding[data-rows="1"] {
+  height: $input-height;
+}
+textarea.form-control--expanding[data-rows="2"] {
+  height: calc($input-height + $input-line-height);
+}
+textarea.form-control--expanding[data-rows="3"] {
+  height: calc($input-height + $input-line-height * 2);
+}
+textarea.form-control--expanding[data-rows="4"] {
+  height: calc($input-height + $input-line-height * 3);
+}
+textarea.form-control--expanding[data-rows="5"] {
+  height: calc($input-height + $input-line-height * 4);
 }

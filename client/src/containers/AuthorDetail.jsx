@@ -36,20 +36,22 @@ const AuthorDetail = React.createClass({
 
               <dt>{'Posts'}</dt>
               <dd>
-                <div className="list-group">
-                  {posts.map(post => (
-                    <Link
-                      className="list-group-item"
-                      key={post.id}
-                      to={`/posts/${post.id}`}
-                    >
-                      {post.title}
-                      <small>
-                        {post.createdAgo()}
-                      </small>
-                    </Link>
-                  ))}
-                </div>
+                {posts.length > 0 ? (
+                  <div className="list-group">
+                    {posts.map(post => (
+                      <Link
+                        className="list-group-item"
+                        key={post.id}
+                        to={`/posts/${post.id}`}
+                      >
+                        {post.title}
+                        <small>
+                          {post.createdAgo()}
+                        </small>
+                      </Link>
+                    ))}
+                  </div>
+                ) : 'This author has not published any posts.'}
               </dd>
             </dl>
           </div>

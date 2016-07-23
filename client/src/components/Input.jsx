@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 
 const Input = React.createClass({
   propTypes: {
+    elRef: PropTypes.func,
     onChange: PropTypes.func,
     type: PropTypes.string
   },
@@ -13,7 +14,7 @@ const Input = React.createClass({
   },
 
   render() {
-    const {onChange, type, ...otherProps} = this.props;
+    const {elRef, onChange, type, ...otherProps} = this.props;
 
     return (
       <input
@@ -23,6 +24,7 @@ const Input = React.createClass({
             onChange(e.target.value);
           }
         }}
+        ref={elRef}
         type={type}
         {...otherProps}
       />

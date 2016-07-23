@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import _ from 'lodash';
+import CommentsBox from './CommentsBox';
 import {postShape} from '../models/Post';
 import {unknownUser, userShape} from '../models/User';
 
@@ -28,7 +29,7 @@ const PostDetail = React.createClass({
                 </Link>
               </small>
             </h2>
-            <dl>
+            <dl className="details-meta">
               <dt>{'Source'}</dt>
               <dd>
                 <a href={post.sourceUrl} target="_blank">
@@ -39,6 +40,10 @@ const PostDetail = React.createClass({
               <dt>{'Posted'}</dt>
               <dd>{post.createdFull()}</dd>
             </dl>
+            <CommentsBox
+              commentIds={post.commentIds}
+              postId={post.id}
+            />
           </div>
         ) : (
           <p className="details-not-found">

@@ -54,14 +54,15 @@ function setKeywords(state, action) {
 function toggleTagHighlighted(state, action) {
   const tagId = action.payload.tagId;
   const highlightedTagIds = state.highlightedTagIds.slice(0);
-  const tagIdIndex = highlightedTagIds.indexOf(tagId);
-  if (tagIdIndex === -1) {
+  const highlightedTagIdIndex = highlightedTagIds.indexOf(tagId);
+  if (highlightedTagIdIndex === -1) {
     highlightedTagIds.push(tagId);
   } else {
-    highlightedTagIds.splice(tagIdIndex, 1);
+    highlightedTagIds.splice(highlightedTagIdIndex, 1);
   }
-  console.log('toggleTagHighlighted(state, action)', {state, action, highlightedTagIds});
-  return _.assign({}, state, {highlightedTagIds});
+  return _.assign({}, state, {
+    highlightedTagIds
+  });
 }
 
 /**
@@ -73,13 +74,21 @@ function toggleTagHighlighted(state, action) {
  */
 function toggleTagSelected(state, action) {
   const tagId = action.payload.tagId;
+  const highlightedTagIds = state.highlightedTagIds.slice(0);
   const selectedTagIds = state.selectedTagIds.slice(0);
-  const tagIdIndex = selectedTagIds.indexOf(tagId);
-  if (tagIdIndex === -1) {
+  const highlightedTagIdIndex = highlightedTagIds.indexOf(tagId);
+  const selectedTagIdIndex = selectedTagIds.indexOf(tagId);
+  if (selectedTagIdIndex === -1) {
     selectedTagIds.push(tagId);
   } else {
-    selectedTagIds.splice(tagIdIndex, 1);
+    // If tag is being deselected, make sure it's not highlighted.
+    if (highlightedTagIdIndex !== -1) {
+      highlightedTagIds.splice(highlightedTagIdIndex, 1);
+    }
+    selectedTagIds.splice(selectedTagIdIndex, 1);
   }
-  console.log('toggleTagSelected(state, action)', {state, action, selectedTagIds});
-  return _.assign({}, state, {selectedTagIds});
+  return _.assign({}, state, {
+    highlightedTagIds,
+    selectedTagIds
+  });
 }

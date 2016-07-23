@@ -1,0 +1,40 @@
+/**
+ * Comments box.
+ */
+
+/* comment list */
+
+.comment-list > ul {
+  margin-bottom: 0;
+}
+
+.comment:not(:last-of-type) {
+  border-bottom: 1px solid $lightest-gray;
+  margin-bottom: $comment-spacing;
+  padding-bottom: $comment-spacing;
+}
+
+.comment-author,
+.comment-time {
+  display: inline-block;
+  font-size: $font-size--small;
+  font-style: italic;
+}
+
+.comment-time {
+  color: $light-gray;
+  margin-left: calc($atom * 2);
+}
+
+.comment-body {
+  display: block;
+  margin-top: $atom;
+}
+
+/* comment form */
+
+.comment-form {
+  border-top: 1px solid $lightest-gray;
+  margin-top: $comment-spacing;
+  padding-top: calc($comment-spacing * 1.5);
+}
