@@ -14,15 +14,15 @@ Here are some of our ideas so far:
 
 Perhaps the most exciting of these three points is the prospect of using the open-source model. This would mean that our users (mostly coders?) can add features, fix bugs, etc.
 
-At the time of this writing, this is what the interface looks like:
+Below are some screenshots of the current interface. These may be slightly outdated, but we'll try to keep them as up-to-date as possible:
 
-![Interface Example A](/docs/images/interface-example-a.png?raw=true "Interface Example A")
+![Interface Example A](/docs/images/Screen Shot 2016-07-23 at 1.26.11 PM.png?raw=true "Interface Example A")
 
-![Interface Example B](/docs/images/interface-example-b.png?raw=true "Interface Example B")
+![Interface Example B](/docs/images/Screen Shot 2016-07-23 at 1.26.27 PM.png?raw=true "Interface Example B")
 
-![Interface Example C](/docs/images/interface-example-c.png?raw=true "Interface Example C")
+![Interface Example C](/docs/images/Screen Shot 2016-07-23 at 1.26.51 PM.png?raw=true "Interface Example C")
 
-![Interface Example C](/docs/images/interface-example-d.png?raw=true "Interface Example D")
+![Interface Example C](/docs/images/Screen Shot 2016-07-23 at 1.29.55 PM.png?raw=true "Interface Example D")
 
 *(Jeff T. speaking...)*
 
