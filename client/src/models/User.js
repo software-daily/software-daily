@@ -4,15 +4,18 @@
 
 import {PropTypes} from 'react';
 import _ from 'lodash';
-import {createModel, createShape, createSpec} from './util';
+import users from '../sample_data/users';
+import {createSpec, idGenerator} from './util';
+
+export const nextUserId = idGenerator(users.length + 1);
 
 const spec = createSpec([
   {field: 'twitter', type: PropTypes.string},
   {field: 'username', type: PropTypes.string}
 ]);
 
-export const userShape = createShape(spec.shape);
-export const userProto = createModel(spec.proto);
+export const userShape = spec.shape;
+export const userProto = spec.proto;
 
 /**
  * Create a new user object.
@@ -21,6 +24,9 @@ export const userProto = createModel(spec.proto);
  * @return {object} - The user model object.
  */
 export function createUser(values) {
+  if (!values.hasOwnProperty('id')) {
+    values.id = nextUserId();
+  }
   return _.create(userProto, values);
 }
 

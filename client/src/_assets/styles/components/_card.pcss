@@ -30,6 +30,8 @@ $card-spacing: $section-spacing;
   display: block;
 }
 
+/* title */
+
 .card-title {
   color: $gray;
   margin-bottom: .25em;
@@ -39,21 +41,36 @@ $card-spacing: $section-spacing;
   color: $theme-4;
 }
 
+/* author */
+
 .card-author {
   font-style: italic;
+  margin-bottom: calc($atom * 6);
 }
 
-.card-author > a {
+.card-author > a,
+.card-comments {
   color: $gray;
+  cursor: pointer;
+  transition: $transition-base;
 }
 
-.card-author > a:hover {
+.card-author > a:hover,
+.card-comments:hover {
   color: $link-hover-color;
+}
+
+.card-comments {
+  float: left;
+}
+
+.card-comments > .fa {
+  margin-right: calc($atom * 2);
 }
 
 .card-time {
   color: $light-gray;
-  text-align: right;
+  float: right;
 }
 
 /* active card (post detail is open) */
@@ -69,6 +86,11 @@ $card-spacing: $section-spacing;
 }
 
 .is-active .card-author > a,
+.is-active .card-comments,
 .is-active .card-time {
   color: $lightest-gray;
+}
+
+.is-active .card-comments {
+  cursor: default;
 }

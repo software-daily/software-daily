@@ -41,6 +41,9 @@ const Card = React.createClass({
             to={`/authors/${author.username}`}
           >{author.username}</Link>
         </span>
+        <span className="card-comments">
+          {post.commentsText()}
+        </span>
         <span className="card-time">
           {post.createdAgo()}
         </span>
